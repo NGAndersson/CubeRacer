@@ -21,10 +21,7 @@ public class DestructionLevel : BaseLevel
     public override void Start()
     {
         base.Start();
-        pickupTotal = GetComponentsInChildren<Fueltank>().Length;
-        ui = gameUI.SetDestructionUI();
-        ui.Init(pickupTotal, timeLimit);
-        timer = timeLimit;
+        Init();
     }
 
     // Update is called once per frame
@@ -43,6 +40,14 @@ public class DestructionLevel : BaseLevel
         }
     }
 
+    private void Init()
+    {
+        pickupTotal = GetComponentsInChildren<Fueltank>().Length;
+        ui = gameUI.SetDestructionUI(this);
+        ui.Init(pickupTotal, timeLimit);
+        timer = timeLimit;
+    }
+
     public void Pickup(int time, Vector3 position)
     {
         Instantiate(popup, position, Quaternion.LookRotation(position - Camera.current.transform.position)).GetComponent<TextMesh>().text = "+" + time.ToString();
@@ -54,5 +59,10 @@ public class DestructionLevel : BaseLevel
         {
             ExitLevel();
         }
+    }
+
+    public override void RestartLevel()
+    {
+
     }
 }

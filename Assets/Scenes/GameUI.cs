@@ -1,17 +1,23 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUI : MonoBehaviour
 {
-    public GameObject DestructionUI;
+    public GameObject destructionUI;
 
-    public GameObject RaceUI;
+    public GameObject raceUI;
+
+    public Button restart;
+    public Button exit;
+
+    private BaseLevel currentLevel;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -20,24 +26,33 @@ public class GameUI : MonoBehaviour
         
     }
 
-    public DestructionUI SetDestructionUI()
+    public DestructionUI SetDestructionUI(BaseLevel level)
     {
+        currentLevel = level;
         DisableAllUI();
-        DestructionUI.SetActive(true);
-        return DestructionUI.GetComponent<DestructionUI>();
+        destructionUI.SetActive(true);
+        SetGenericUI();
+        return destructionUI.GetComponent<DestructionUI>();
     }
     
-    public RaceUI SetRaceUI()
+    public RaceUI SetRaceUI(BaseLevel level)
     {
+        currentLevel = level;
         DisableAllUI();
-        RaceUI.SetActive(true);
-        return RaceUI.GetComponent<RaceUI>();
+        raceUI.SetActive(true);
+        SetGenericUI();
+        return raceUI.GetComponent<RaceUI>();
     }
     
-
     private void DisableAllUI()
     {
-        DestructionUI.SetActive(false);
-        RaceUI.SetActive(false);
+        destructionUI.SetActive(false);
+        raceUI.SetActive(false);
+    }
+
+    private void SetGenericUI()
+    {
+        exit.onClick.AddListener(() => { currentLevel.ExitLevel(); });
+        restart.onClick.AddListener(() => { currentLevel.RestartLevel(); });
     }
 }

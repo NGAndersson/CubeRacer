@@ -19,9 +19,8 @@ public class RaceLevel : BaseLevel
     {
         base.Start();
         checkpointTotal = GetComponentsInChildren<RaceCheckpoint>().Length;
-        ui = gameUI.SetRaceUI();
+        ui = gameUI.SetRaceUI(this);
         bestLap = PlayerPrefs.GetFloat(gameObject.name + ":bestlap", float.MaxValue);
-        Debug.Log(bestLap);
         ui.Init(bestLap);
         timer = 0f;
     }
@@ -62,5 +61,13 @@ public class RaceLevel : BaseLevel
                 timer = 0;
             }
         }
+    }
+
+    public override void RestartLevel()
+    {
+        timer = 0f;
+        checkpointCurrent = 0;
+        player.gameObject.transform.position = new Vector3(0, 0, 0);
+        player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 }

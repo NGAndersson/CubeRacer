@@ -25,9 +25,10 @@ public abstract class BaseLevel : MonoBehaviour
 
     public void ExitLevel()
     {
-        Debug.Log("Exit level");
         FindObjectOfType<UIManager>().ExitLevel();
         Destroy(player.gameObject);
         Destroy(gameObject);
     }
+
+    public abstract void RestartLevel();
 }
