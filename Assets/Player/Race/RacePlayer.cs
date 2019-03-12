@@ -12,6 +12,8 @@ public class RacePlayer : BasePlayer
 
     public int pickupOrder = 0;
 
+    public TrailRenderer trail;
+
     // Start is called before the first frame update
     public override void Start()
     {
@@ -44,9 +46,11 @@ public class RacePlayer : BasePlayer
 
         // Get aim vector
         Vector3 aimVector = GetAimRotation();
-        
+
+        bool onGround = Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, 1f, 1 << 9); // 9 is the ground layer.
+
         // Hover
-        if (Physics.Raycast(transform.position, -transform.up, out RaycastHit hitInfo, 1f, 1 << 9)) // 9 is the ground layer.
+        if (onGround) 
         {
             rigidbody.useGravity = false;
             positionPlane.SetNormalAndPosition(hitInfo.normal, transform.position); // Try with hitInfo.normal later.
@@ -63,6 +67,16 @@ public class RacePlayer : BasePlayer
             if (aimVector != Vector3.zero)
                 transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(aimVector, new Vector3(0, 1)), 0.1f);
         }
+
+        if (Vector3.Angle(rigidbody.velocity, aimVector) > 90 && rigidbody.velocity.magnitude > 4 && onGround)
+        {
+            trail.emitting = true;
+        }
+        else
+        {
+            trail.emitting = false;
+        }
+
     }
 
     private Vector3 GetAimRotation()
