@@ -8,13 +8,14 @@ public abstract class BaseLevel : MonoBehaviour
     public GameUI gameUI;
 
     [HideInInspector]
-    public PlayerController player;
+    public BasePlayer player;
+
+    public Transform playerStart;
 
     // Start is called before the first frame update
-    public virtual void Start()
+    public virtual void Awake()
     {
         gameUI = FindObjectOfType<GameUI>();
-        player = FindObjectOfType<PlayerController>();
     }
 
     // Update is called once per frame
@@ -26,7 +27,6 @@ public abstract class BaseLevel : MonoBehaviour
     public void ExitLevel()
     {
         FindObjectOfType<UIManager>().ExitLevel();
-        Destroy(player.gameObject);
         Destroy(gameObject);
     }
 

@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 5311304479498392180}
   - component: {fileID: 5311304479498392179}
   m_Layer: 0
-  m_Name: Player
+  m_Name: DestructionPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,6 +230,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameCamera: {fileID: 0}
   shooter: {fileID: 5311304479318870164}
-  popup: {fileID: 2992755251409767158, guid: 725234ae4b892b643b4e316c6735ab51, type: 3}
   clickTimer: 0
   pickupOrder: 0

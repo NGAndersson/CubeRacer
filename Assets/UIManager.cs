@@ -33,10 +33,6 @@ public class UIManager : MonoBehaviour
             GameUI.SetActive(true);
             
             currentLevel = Instantiate(levels[id]);
-            
-            GameObject playerInstance = Instantiate(player);
-            playerInstance.GetComponent<PlayerController>().gameCamera = cam;
-            cam.GetComponent<CameraController>().Init(playerInstance.transform);
         }
     }
 

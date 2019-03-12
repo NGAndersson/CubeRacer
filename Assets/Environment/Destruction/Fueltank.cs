@@ -6,12 +6,12 @@ public class Fueltank : MonoBehaviour
 {
     public int order = 0;
 
-    private PlayerController player;
+    private DestructionPlayer player;
 
     // Start is called before the first frame update
     void Start()
     {
-        player = FindObjectOfType<PlayerController>();
+        player = FindObjectOfType<DestructionPlayer>();
     }
 
     // Update is called once per frame
@@ -27,7 +27,7 @@ public class Fueltank : MonoBehaviour
     {
         if ((order == 0 || player.pickupOrder == order) && collision.gameObject.GetComponent<BaseBullet>() != null)
         {
-            player.Pickup(PlayerController.PickupType.fuel, order > 0);
+            player.Pickup(DestructionPlayer.PickupType.fuel, order > 0);
 
             Destroy(gameObject);
         }

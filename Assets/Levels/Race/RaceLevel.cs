@@ -5,19 +5,23 @@ using UnityEngine.UI;
 
 public class RaceLevel : BaseLevel
 {
+    public GameObject playerObj;
+
     private float timer;
     private float bestLap;
     private bool playing = true;
 
     private int checkpointTotal;
-    private int checkpointCurrent;
+    private int checkpointCurrent = 0;
 
     private RaceUI ui;
     
     // Start is called before the first frame update
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.player = Instantiate(playerObj, base.playerStart).GetComponent<BasePlayer>();
+        base.Awake();
+
         checkpointTotal = GetComponentsInChildren<RaceCheckpoint>().Length;
         ui = gameUI.SetRaceUI(this);
         bestLap = PlayerPrefs.GetFloat(gameObject.name + ":bestlap", float.MaxValue);
@@ -43,6 +47,7 @@ public class RaceLevel : BaseLevel
 
     public void Checkpoint(int checkpointNr)
     {
+        Debug.Log("Checkpoint: " + checkpointNr);
         if (checkpointNr == checkpointCurrent + 1)
         {
             checkpointCurrent++;

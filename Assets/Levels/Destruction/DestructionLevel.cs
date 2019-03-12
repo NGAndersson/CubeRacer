@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class DestructionLevel : BaseLevel
 {
+    public GameObject playerObj;
+
     public float timeLimit;
 
     private float timer;
@@ -18,9 +20,10 @@ public class DestructionLevel : BaseLevel
     private DestructionUI ui;
     
     // Start is called before the first frame update
-    public override void Start()
+    public override void Awake()
     {
-        base.Start();
+        base.player = Instantiate(playerObj, base.playerStart).GetComponent<BasePlayer>();
+        base.Awake();
         Init();
     }
 
@@ -50,7 +53,7 @@ public class DestructionLevel : BaseLevel
 
     public void Pickup(int time, Vector3 position)
     {
-        Instantiate(popup, position, Quaternion.LookRotation(position - Camera.current.transform.position)).GetComponent<TextMesh>().text = "+" + time.ToString();
+        Instantiate(popup, position, Quaternion.LookRotation(position - Camera.main.transform.position)).GetComponent<TextMesh>().text = "+" + time.ToString();
         timer += time;
         pickupCurrent++;
         ui.SetPickupCounter(pickupCurrent, pickupTotal);

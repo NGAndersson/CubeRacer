@@ -23,7 +23,7 @@ public class RaceCheckpoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name == "Player(Clone)")
+        if (other.name.Contains("Player"))
         {
             gameplay.Checkpoint(order);
         }
