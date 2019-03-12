@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,6 +9,8 @@ public class GameUI : MonoBehaviour
     public GameObject destructionUI;
 
     public GameObject raceUI;
+
+    public GameObject cuburinUI;
 
     public Button restart;
     public Button exit;
@@ -34,7 +37,16 @@ public class GameUI : MonoBehaviour
         SetGenericUI();
         return destructionUI.GetComponent<DestructionUI>();
     }
-    
+
+    public CuburinUI SetCuburinUI(BaseLevel level)
+    {
+        currentLevel = level;
+        DisableAllUI();
+        cuburinUI.SetActive(true);
+        SetGenericUI();
+        return cuburinUI.GetComponent<CuburinUI>();
+    }
+
     public RaceUI SetRaceUI(BaseLevel level)
     {
         currentLevel = level;

@@ -76,7 +76,7 @@ public class RaceLevel : BaseLevel
     {
         timer = 0f;
         checkpointCurrent = 0;
-        player.gameObject.transform.position = new Vector3(0, 0, 0);
+        player.gameObject.transform.position = playerStart.transform.position;
         player.gameObject.GetComponent<Rigidbody>().velocity = new Vector3(0, 0, 0);
     }
 }

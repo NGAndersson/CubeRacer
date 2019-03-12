@@ -8,6 +8,8 @@ public class CameraController : MonoBehaviour
 
     private Vector3 lookAtVector;
 
+    public float moveLerpFactor = 0.6f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +21,7 @@ public class CameraController : MonoBehaviour
     {
         if (player != null)
         {
-            this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position + offset, 0.6f);
+            this.gameObject.transform.position = Vector3.Lerp(gameObject.transform.position, player.transform.position + offset, moveLerpFactor);
             this.transform.LookAt(player);
         }
     }

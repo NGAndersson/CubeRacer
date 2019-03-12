@@ -12,6 +12,7 @@ public abstract class BaseLevel : MonoBehaviour
 
     public Transform playerStart;
 
+    [HideInInspector]
     public bool playing;
 
     // Start is called before the first frame update
