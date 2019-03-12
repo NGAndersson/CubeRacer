@@ -9,7 +9,7 @@ public class Shooter : MonoBehaviour
     private float timer = 0f;
 
     [SerializeField]
-    private List<GameObject> bullets;
+    public List<GameObject> bullets;
 
     private GameObject bullet;
 

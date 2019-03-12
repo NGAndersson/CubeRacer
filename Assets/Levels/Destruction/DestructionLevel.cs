@@ -10,7 +10,6 @@ public class DestructionLevel : BaseLevel
     public float timeLimit;
 
     private float timer;
-    private bool playing = true;
 
     private int pickupTotal;
     private int pickupCurrent;
@@ -43,7 +42,7 @@ public class DestructionLevel : BaseLevel
         }
     }
 
-    private void Init()
+    public override void Init()
     {
         pickupTotal = GetComponentsInChildren<Fueltank>().Length;
         ui = gameUI.SetDestructionUI(this);

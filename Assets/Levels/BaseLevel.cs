@@ -12,6 +12,8 @@ public abstract class BaseLevel : MonoBehaviour
 
     public Transform playerStart;
 
+    public bool playing;
+
     // Start is called before the first frame update
     public virtual void Awake()
     {
@@ -23,6 +25,8 @@ public abstract class BaseLevel : MonoBehaviour
     {
         
     }
+
+    public abstract void Init();
 
     public void ExitLevel()
     {

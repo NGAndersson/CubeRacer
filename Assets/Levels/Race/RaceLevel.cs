@@ -9,7 +9,6 @@ public class RaceLevel : BaseLevel
 
     private float timer;
     private float bestLap;
-    private bool playing = true;
 
     private int checkpointTotal;
     private int checkpointCurrent = 0;
@@ -21,12 +20,17 @@ public class RaceLevel : BaseLevel
     {
         base.player = Instantiate(playerObj, base.playerStart).GetComponent<BasePlayer>();
         base.Awake();
+        Init();
+    }
 
+    public override void Init()
+    {
         checkpointTotal = GetComponentsInChildren<RaceCheckpoint>().Length;
         ui = gameUI.SetRaceUI(this);
         bestLap = PlayerPrefs.GetFloat(gameObject.name + ":bestlap", float.MaxValue);
         ui.Init(bestLap);
         timer = 0f;
+        playing = true;
     }
 
     // Update is called once per frame

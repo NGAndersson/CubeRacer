@@ -2,13 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RacePlayer : BasePlayer
+public class DestructionPlayer : BasePlayer
 {
     private new Rigidbody rigidbody;
 
     private Plane positionPlane = new Plane();
 
     private Vector3 aimVector;
+
+    public Shooter shooter;
+
+    public float clickTimer = 0f;
 
     public int pickupOrder = 0;
 
@@ -17,6 +21,12 @@ public class RacePlayer : BasePlayer
     {
         base.Start();
         rigidbody = GetComponent<Rigidbody>();
+        GetComponentInChildren<Shooter>().BulletType = Shooter.BulletTypes.Peashot;
+    }
+
+    public override void Init()
+    {
+        throw new System.NotImplementedException();
     }
 
     // Update is called once per frame
@@ -25,6 +35,20 @@ public class RacePlayer : BasePlayer
         base.Update();
 
         Move();
+
+        if (Input.GetButtonUp("Fire1") && clickTimer < 0.2f)
+        {
+            shooter.Shoot();
+        }
+
+        if (Input.GetButton("Fire1"))
+        {
+            clickTimer += Time.deltaTime;
+        }
+        else
+        {
+            clickTimer = 0;
+        }
     }
 
     private void Move()
@@ -90,5 +114,22 @@ public class RacePlayer : BasePlayer
         aimVector = r.GetPoint(distanceToPoint) - transform.position;
         return aimVector.normalized;
 #endif
+    }
+
+    public void Pickup(PickupType type, bool addOrder)
+    {
+        if (type == PickupType.fuel)
+        {
+            if (addOrder)
+            {
+                pickupOrder++;
+            }
+            FindObjectOfType<DestructionLevel>().Pickup(5, transform.position);
+        }
+    }
+
+    public enum PickupType
+    {
+        fuel
     }
 }

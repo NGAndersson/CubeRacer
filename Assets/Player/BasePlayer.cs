@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasePlayer : MonoBehaviour
+public abstract class BasePlayer : MonoBehaviour
 {
     public Camera gameCamera;
 
@@ -17,4 +17,6 @@ public class BasePlayer : MonoBehaviour
     {
 
     }
+
+    public abstract void Init();
 }
