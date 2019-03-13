@@ -29,7 +29,7 @@ public abstract class BaseLevel : MonoBehaviour
 
     public abstract void Init();
 
-    public void ExitLevel()
+    public virtual void ExitLevel()
     {
         FindObjectOfType<UIManager>().ExitLevel();
         Destroy(gameObject);

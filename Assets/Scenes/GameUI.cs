@@ -12,6 +12,8 @@ public class GameUI : MonoBehaviour
 
     public GameObject cuburinUI;
 
+    public GameObject vnUI;
+
     public Button restart;
     public Button exit;
 
@@ -28,6 +30,15 @@ public class GameUI : MonoBehaviour
     {
         
     }
+    /*
+    public T SetDestructionUI<T>(BaseLevel level) where T : BaseGameplayUI
+    {
+        currentLevel = level;
+        DisableAllUI();
+        destructionUI.SetActive(true);
+        SetGenericUI();
+        return destructionUI.GetComponent<T>();
+    }*/
 
     public DestructionUI SetDestructionUI(BaseLevel level)
     {
@@ -55,11 +66,22 @@ public class GameUI : MonoBehaviour
         SetGenericUI();
         return raceUI.GetComponent<RaceUI>();
     }
+
+    public VNUI SetVNUI(BaseLevel level)
+    {
+        currentLevel = level;
+        DisableAllUI();
+        vnUI.SetActive(true);
+        SetGenericUI();
+        return vnUI.GetComponent<VNUI>();
+    }
     
     private void DisableAllUI()
     {
         destructionUI.SetActive(false);
         raceUI.SetActive(false);
+        cuburinUI.SetActive(false);
+        vnUI.SetActive(false);
     }
 
     private void SetGenericUI()
