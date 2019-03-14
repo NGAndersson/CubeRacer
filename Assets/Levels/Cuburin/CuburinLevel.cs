@@ -63,5 +63,6 @@ public class CuburinLevel : BaseLevel
     {
         Destroy(player.gameObject);
         base.player = Instantiate(playerObj, base.playerStart).GetComponent<BasePlayer>();
+        timer = 0f;
     }
 }
